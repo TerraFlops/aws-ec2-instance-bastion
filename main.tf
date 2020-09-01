@@ -1,29 +1,7 @@
-# Select most recent image as the AMI to use
-data "aws_ami" "bastion" {
-  most_recent = true
-  owners = ["099720109477"]
-  filter {
-    name = "architecture"
-    values = ["x86_64"]
-  }
-  filter {
-    name = "name"
-    values = ["ubuntu/images/hvm-*"]
-  }
-  filter {
-    name = "virtualization-type"
-    values = ["hvm"]
-  }
-  filter {
-    name = "ena-support"
-    values = ["true"]
-  }
-}
-
 # Create EC2 instances
 resource "aws_instance" "instance" {
   for_each = var.subnet_ids
-  ami = data.aws_ami.bastion.id
+  ami = var.ami_id
   monitoring = true
   instance_type = var.instance_type
   vpc_security_group_ids = var.security_group_ids

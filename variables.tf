@@ -16,6 +16,12 @@ variable "instance_type" {
   default = "t3a.nano"
 }
 
+variable "ami_id" {
+  description = "Optional override for AMI ID, change with caution"
+  type = string
+  default = "ami-0f87b0a4eff45d9ce"
+}
+
 variable "authorized_keys" {
   description = "Authorized SSH keys file which will be injected into the Bastion server"
   type = string
