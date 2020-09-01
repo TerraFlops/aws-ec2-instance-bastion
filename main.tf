@@ -35,6 +35,9 @@ resource "aws_instance" "instance" {
   }
   lifecycle {
     ignore_changes = [
+      # Ignore any changes to the AMI image
+      ami,
+      # Ignore any changes to the EC2 key name
       key_name
     ]
   }
