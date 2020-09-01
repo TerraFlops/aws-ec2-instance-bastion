@@ -19,7 +19,7 @@ resource "aws_instance" "instance" {
       key_name
     ]
   }
-  user_data = templatefile("./userdata.sh", {
+  user_data = templatefile("${path.module}/userdata.sh", {
     authorized_keys = var.authorized_keys
   })
 }
