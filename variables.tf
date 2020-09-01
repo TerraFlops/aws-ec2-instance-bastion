@@ -34,9 +34,9 @@ variable "iam_instance_profile" {
   default = null
 }
 
-variable "subnet_ids" {
-  description = "Set of AWS subnet IDs into which bastions will be launched"
-  type = set(string)
+variable "subnet_id" {
+  description = "AWS subnet IDs into which bastions will be launched"
+  type = string
 }
 
 variable "security_group_ids" {

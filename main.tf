@@ -1,11 +1,10 @@
 # Create EC2 instances
 resource "aws_instance" "instance" {
-  for_each = var.subnet_ids
   ami = var.ami_id
   monitoring = true
   instance_type = var.instance_type
   vpc_security_group_ids = var.security_group_ids
-  subnet_id = each.value
+  subnet_id = var.subnet_id
   iam_instance_profile = var.iam_instance_profile
   tags = {
     Name = var.instance_name
@@ -26,7 +25,6 @@ resource "aws_instance" "instance" {
 
 # Create elastic IPs
 resource "aws_eip" "server_eip" {
-  for_each = var.subnet_ids
   vpc = true
   tags = {
     Name = var.instance_name
@@ -35,7 +33,6 @@ resource "aws_eip" "server_eip" {
 
 # Associate elastic IPs
 resource "aws_eip_association" "server_eip_association" {
-  for_each = var.subnet_ids
-  public_ip = aws_eip.server_eip[each.key].public_ip
-  instance_id = aws_instance.instance[each.key].id
+  public_ip = aws_eip.server_eip.public_ip
+  instance_id = aws_instance.instance.id
 }

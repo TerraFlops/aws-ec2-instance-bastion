@@ -15,9 +15,7 @@ module "example" {
   instance_type = "t3a.nano"
   authorized_keys = file("./bastion/authorized_keys")
   iam_instance_profile = "BastionIamInstanceProfile"
-  subnet_ids = [
-    "subnet-xxxxxxxxxxxxxxxxxx"
-  ]
+  subnet_id = "subnet-xxxxxxxxxxxxxxxxxx"
   security_group_ids = [
     "sg-xxxxxxxxxxxxxxxxxx"
   ]
