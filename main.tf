@@ -19,10 +19,9 @@ resource "aws_instance" "instance" {
       key_name
     ]
   }
-  provisioner "file" {
-    content = var.authorized_keys
-    destination = "/home/ubuntu/.ssh/authorized_keys"
-  }
+  user_data = templatefile("./userdata.sh", {
+    authorized_keys = var.authorized_keys
+  })
 }
 
 # Create elastic IPs
