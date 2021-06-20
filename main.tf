@@ -36,3 +36,14 @@ resource "aws_eip_association" "server_eip_association" {
   public_ip = aws_eip.server_eip.public_ip
   instance_id = aws_instance.instance.id
 }
+
+resource "aws_route53_record" "bastion" {
+  name = var.route_53_cname
+  type = "A"
+  ttl = 60
+  zone_id = var.route_53_zone_id
+  allow_overwrite = true
+  records = [
+    aws_eip.server_eip.public_ip
+  ]
+}

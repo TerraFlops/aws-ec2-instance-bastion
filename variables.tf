@@ -44,3 +44,13 @@ variable "security_group_ids" {
   type = set(string)
   default = []
 }
+
+variable "route_53_cname" {
+  type = string
+  default = null
+}
+
+variable "route_53_zone_id" {
+  type = string
+  default = null
+}
