@@ -38,6 +38,7 @@ resource "aws_eip_association" "server_eip_association" {
 }
 
 resource "aws_route53_record" "bastion" {
+  count = var.route_53_cname != null && var.route_53_zone_id != null ? 1 : 0
   name = var.route_53_cname
   type = "A"
   ttl = 60
